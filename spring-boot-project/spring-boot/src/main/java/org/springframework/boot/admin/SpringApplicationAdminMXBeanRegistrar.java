@@ -69,6 +69,11 @@ public class SpringApplicationAdminMXBeanRegistrar implements ApplicationContext
 		this.objectName = new ObjectName(name);
 	}
 
+	/**
+	 * setApplicationContext
+	 * @param applicationContext
+	 * @throws BeansException
+	 */
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		Assert.state(applicationContext instanceof ConfigurableApplicationContext,
@@ -81,6 +86,11 @@ public class SpringApplicationAdminMXBeanRegistrar implements ApplicationContext
 		this.environment = environment;
 	}
 
+	/**
+	 *
+	 * @param eventType
+	 * @return value
+	 */
 	@Override
 	public boolean supportsEventType(ResolvableType eventType) {
 		Class<?> type = eventType.getRawClass();
@@ -91,11 +101,20 @@ public class SpringApplicationAdminMXBeanRegistrar implements ApplicationContext
 				|| WebServerInitializedEvent.class.isAssignableFrom(type);
 	}
 
+	/**
+	 *
+	 * @param sourceType
+	 * @return value
+	 */
 	@Override
 	public boolean supportsSourceType(Class<?> sourceType) {
 		return true;
 	}
 
+	/**
+	 * application event
+	 * @param event
+	 */
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (event instanceof ApplicationReadyEvent readyEvent) {
